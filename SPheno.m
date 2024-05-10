@@ -1,26 +1,22 @@
 OnlyLowEnergySPheno = True;
 
 MINPAR={
-  {1, lambda5Input},
-  {2,lambda1Input},
-  {3,lambda2Input},
-  {4,lambda3Input},
-  {5,lambda4Input},
-  {6,mEt2Input}
+  {1,lambda1INput},
+  {2,lam4EtaINput}, 
+  {3,lamHEta3INput},
+  {4,lambda4HEtaINput}, 
+  {5,lambda5HEtaINput}, 
+  {6,lam4SigINput},
+  {7,lamHSigINput},
+  {8,lamEtaSigINput},
+  {9, mEta2INput},
+  {10, mSi2INput},
+  {11, cTriINput}
 };
 
-ParametersToSolveTadpoles = {mH2};
+RealParameters = {mEta2INput, mSi2INput, TINput, lambda1INput,lam4EtaINput,lamHEta3INput,lambda4HEtaINput,lambda5HEtaINput,lam4SigINput,lamHSigINput,lamEtaSigINput};
+ParametersToSolveTadpoles = {mu2};
 
-BoundaryLowScaleInput={
-  {mEt2,mEt2Input},
-  {lambda1,lambda1Input},
-  {lambda2,lambda2Input},
-  {lambda3,lambda3Input},
-  {lambda4,lambda4Input},
-  {lambda5,lambda5Input},
-  {Yn, LHInput[Yn]},
-  {Mn, LHInput[Mn]}
-};
 DEFINITION[MatchingConditions]=
 {{v, vSM},
   {Ye, YeSM},
@@ -29,6 +25,32 @@ DEFINITION[MatchingConditions]=
   {g1, g1SM},
   {g2, g2SM},
   {g3, g3SM}};
-  
-ListDecayParticles = {Fu,Fe,Fd,Fv,VZ,VWp,hh,etR,etI,etp,Chi};
-ListDecayParticles3B = {{Fu,"Fu.f90"},{Fe,"Fe.f90"},{Fd,"Fd.f90"}};
+
+BoundaryLowScaleInput={
+ {\[Lambda],lambda1INput}, 
+ {lam4Eta,lam4EtaINput}, 
+ {lamHEta3,lamHEta3INput}, 
+ {lambda4HEta,lambda4HEtaINput}, 
+ {lambda5HEta,lambda5HEtaINput}, 
+ {lam4Sig,lam4SigINput},
+ {lamHSig,lamHSigINput},
+ {lamEtaSig,lamEtaSigINput},
+ {mEta2, mEta2INput},
+ {mSi2,mSi2INput},
+ {cTri,cTriINput},
+ {mN, LHInput[mN]},
+ {Yn, LHInput[Yn]}
+};
+AddTreeLevelUnitarityLimits=False;
+
+ListDecayParticles = {Fu,Fe,Fd,Fv,hh,etaI,FX0,P0};(*{Fu,Fe,Fd,Fv,VZ,VWp,hh,etaR, etaI,etap,FX0, Ah};*)
+ListDecayParticles3B = Automatic(*{{Fu,"Fu.f90"},{Fe,"Fe.f90"},{Fd,"Fd.f90"}}*);
+RenConditionsDecays={
+{dCosTW, 1/2*Cos[ThetaW] * (PiVWm/(MVWM^2) - PiVZ/(mVZ^2)) },
+{dSinTW, -dCosTW/Tan[ThetaW]},
+{dg2, 1/2*g2*(derPiVPheavy0 + PiVPlightMZ/MVZ^2 -
+(-(PiVWm/MVWm^2) + PiVZ/MVZ^2)/Tan[ThetaW]^2
++ (2*PiVZVP*Tan[ThetaW])/MVZ^2) },
+{dg1, dg2*Tan[ThetaW]+g2*dSinTW/Cos[ThetaW]
+- dCosTW*g2*Tan[ThetaW]/Cos[ThetaW]} };
+

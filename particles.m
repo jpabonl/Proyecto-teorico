@@ -25,7 +25,14 @@ ParticleDefinitions[GaugeES] = {
             ElectricCharge -> 1, 
             LaTeX -> {"\\eta_{+}","\\eta_{-}"}, 
             OutputName -> {"Etap","Etam"} }},  
-
+            
+	 {eta0,   {  Description -> "interaction eigenstates neutral scalar", 
+	  PDG -> {1005},
+	  PDG . IX -> {1005},
+	  Mass -> LesHouches,
+	  ElectricCharge -> 1,
+	  LaTeX -> {"\\eta_0"},
+	  OutputName -> "Eta0" }},      
                  
     {VB, { Description -> "B-Boson"}},  
     {VG, { Description -> "Gluon"}},  
@@ -40,26 +47,48 @@ ParticleDefinitions[EWSB] = {
 
     (* Part\[IAcute]culas relacionadas con la ruptura de simetr\[IAcute]a EWSB *)
 
-    {hh, {  Description -> "Higgs",
-            PDG -> {25,1111},
-            PDG . IX -> {101000001},
-            FeynArtsNr ->  900000010,
-            ElectricCharge -> 0 }},                  
-    {Ah, {  Description -> "Pseudo-Scalar Higgs",
-            PDG ->  {0,200002},
-            Mass ->  Automatic,
-            ElectricCharge ->  0,
-            FeynArtsNr ->  900000011,
-            LaTeX ->  "Ah",
-            OutputName ->  "Ah" }}, 
-    {Hp, {  Description -> "Charged Higgs", 
-            PDG -> {0},
-            PDG . IX ->{0},
-            Width -> {0}, 
-            Mass -> {0},
-            LaTeX -> {"H^+","H^-"},
-            OutputName -> {"Hp","Hm"},
-            ElectricCharge   ->  1 }},
+    {hh   ,  {  Description -> "Higgs",
+                 PDG -> {25},
+                 PDG . IX -> {101000001},
+		 Mass -> Automatic }}, 
+                                  
+     {Ah   ,  {  Description -> "Pseudo-Scalar Higgs",
+                 PDG -> {0},
+                 PDG . IX ->{0},
+                 Mass -> {0},
+                 Width -> {0} }}, 
+                 
+{     Hp,     { Description -> "Charged Higgs", 
+                 PDG -> {0},
+                 PDG . IX ->{0},
+                 Width -> {0}, 
+                 Mass -> {0},
+                 LaTeX -> {"H^+","H^-"},
+                 OutputName -> {"Hp","Hm"},
+                 ElectricCharge->1
+                 }},     
+      {P0,   {  Description -> "mass eigenstates neutral scalars", 
+		 PDG -> {2001,2002},
+		 PDG . IX -> {2001,2002},
+		 Mass -> LesHouches,
+		 ElectricCharge -> 0,
+		 LaTeX -> "\\phi_{0i}",
+		 OutputName -> "P0"}}, 
+                 
+       {etaI,     { Description -> "CP-odd eta scalar", 
+                 PDG -> {1002}, 
+                 Mass -> LesHouches,
+                 ElectricCharge->0,
+                 LaTeX->"\\eta_I",
+                 OutputName->"etaI"}},
+                 
+       {etap,     { Description -> "Charged eta scalar", 
+                 PDG -> {1003}, 
+                 Mass -> LesHouches,
+                 ElectricCharge->1,
+                 LaTeX->"\\eta^+",
+                 OutputName->"etp"}},          
+           
     {VP, { Description -> "Photon"}}, 
     {VZ, { Description -> "Z-Boson", Goldstone -> Ah }},  (* Bos\[OAcute]n Z con el Goldstone asociado Ah *)
     {VWp, { Description -> "W+ - Boson", Goldstone -> Hp}},  (* Bos\[OAcute]n W+ con el Goldstone asociado Hp *)
@@ -76,47 +105,51 @@ ParticleDefinitions[EWSB] = {
     {Fu, { Description -> "Up-Quarks"}},
     {Fe, { Description -> "Leptons" }},
     {Fv, { Description -> "Neutrinos" }},
-    {Chi, { Description -> "Singlet Fermions",
-            PDG -> {1012,1014,1016},
-            Mass -> LesHouches,
-            ElectricCharge -> 0,
-            LaTeX -> "N",
-            OutputName -> "N" }}
+      {FX0, { Description -> "New neutral fermions",
+ 		PDG -> {3001,3002,3003},
+ 		PDG . IX -> {3001,3002,3003},
+ 		Mass -> LesHouches,
+ 		ElectricCharge -> 0,
+ 		LaTeX -> "\\chi^{0}",
+  		OutputName -> "X0" }}
+            
 };
 
 (* Definiciones de nombres LaTeX  *)
 
 WeylFermionAndIndermediate =
 {
-    {H, {  PDG -> {0},
-           Width -> 0, 
-           Mass -> Automatic,
-           LaTeX -> "H",
-           OutputName -> ""}},
-    {Et, {LaTeX -> "\\eta"}},
-    {dR, {LaTeX -> "d_R" }},
-    {eR, {LaTeX -> "e_R" }},
-    {lep, {LaTeX -> "l" }},
-    {uR, {LaTeX -> "u_R" }},
-    {q, {LaTeX -> "q" }},
-    {eL, {LaTeX -> "e_L" }},
-    {dL, {LaTeX -> "d_L" }},
-    {uL, {LaTeX -> "u_L" }},
-    {vL, {LaTeX -> "\\nu_L" }},
-    {DR, {LaTeX -> "D_R" }},
-    {ER, {LaTeX -> "E_R" }},
-    {UR, {LaTeX -> "U_R" }},
-    {EL, {LaTeX -> "E_L" }},
-    {DL, {LaTeX -> "D_L" }},
-    {UL, {LaTeX -> "U_L" }},
-    {X0, {LaTeX -> "X^0"}},
-    {VL, {LaTeX -> "V_L" }},
-    {phis, {LaTeX -> "\\phi_S"}},
-    {phih, {LaTeX -> "\\phi_H"}},   
-    {n, {LaTeX -> "N" }},
-    {n0, {LaTeX -> "N_R"}},
-    {nR, {LaTeX -> "\\nu_R" }},
-    {Sig, {LaTeX -> "\\sigma"}},
-    {Ss, {LaTeX -> "G_S"}}
+    {H,      {   PDG -> {0},
+                 Width -> 0, 
+                 Mass -> Automatic,
+                 LaTeX -> "H",
+                 OutputName -> "" }},
+     {Sig0, {LaTeX -> "S" }},
+	{Eta, LaTeX->"\\eta"},
+	{etaI, LaTeX->"\\eta_I"},
+	{etaR, LaTeX->"\\eta_R"},
+
+    
+   {n,   {LaTeX -> "N"} }, 
+   {N0,   {LaTeX -> "N_R"} },
+   {X0,   {LaTeX -> "\\chi_0"} }, 
+   
+   {dR,     {LaTeX -> "d_R" }},
+   {eR,     {LaTeX -> "e_R" }},
+   {lep,     {LaTeX -> "l" }},
+   {uR,     {LaTeX -> "u_R" }},
+   {q,     {LaTeX -> "q" }},
+   {eL,     {LaTeX -> "e_L" }},
+   {dL,     {LaTeX -> "d_L" }},
+   {uL,     {LaTeX -> "u_L" }},
+   {vL,     {LaTeX -> "\\nu_L" }},
+
+   {DR,     {LaTeX -> "D_R" }},
+   {ER,     {LaTeX -> "E_R" }},
+   {UR,     {LaTeX -> "U_R" }},
+   {EL,     {LaTeX -> "E_L" }},
+   {DL,     {LaTeX -> "D_L" }},
+   {UL,     {LaTeX -> "U_L" }},
+   {VL,     {LaTeX -> "\\nu_{LL}" }}
 };
 
